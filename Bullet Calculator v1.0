@@ -1,0 +1,126 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	char repetir = 'y';
+	while (repetir == 'y' || repetir == 'Y') {
+		string rango;
+		string apellido_paterno;
+		string nombre;
+		cout << "Hola Usuario, Por favor escriba su rango (PVT, CPT, etc): " << endl;
+		cin >> rango;
+		cout << "Por favor escriba su Apellido Paterno: " << endl;
+		cin >> apellido_paterno;
+		cout << "Escriba su nombre: " << endl;
+		cin >> nombre;
+		cout << rango << " " << apellido_paterno
+		     << ", Escoja una opcion: 1. Field 2. Range" << endl;
+		int opcion;
+		cin >> opcion;
+// ======================= FIELD OPTION =======================
+		if (opcion == 1) {
+			int soldadosHQ;
+			int soldadosFPLT;
+			int soldadosSPLT;
+			int soldadosTPLT;
+			int soldadosDHQ;
+			int soldadosDFPLT;
+			int soldadosDSPLT;
+			int soldadosDTPLT;
+			int dias = 0;
+			int noches = 0;
+			cout << "Cuantos soldados por peloton iran?" << endl << " HQ: ";
+			cin >> soldadosHQ;
+			cout << "1PLT: ";
+			cin >> soldadosFPLT;
+			cout << "2PLT: ";
+			cin >> soldadosSPLT;
+			cout << "3PLT: ";
+			cin >> soldadosTPLT;
+			cout << "Cuantos soldados por peloton dispararan?" << endl << "HQ: ";
+			cin >> soldadosDHQ;
+			cout << "1PLT: ";
+			cin >> soldadosDFPLT;
+			cout << "2PLT: ";
+			cin >> soldadosDSPLT;
+			cout << "3PLT: ";
+			cin >> soldadosDTPLT;
+			int soldadosD = (soldadosDHQ + soldadosDFPLT + soldadosDSPLT
+			                 + soldadosDTPLT);
+			int soldadosP = (soldadosHQ + soldadosFPLT + soldadosSPLT +
+			                 soldadosTPLT);
+			while (soldadosD > soldadosP) {
+				cout << "Error: no pueden disparar mas soldados de losque van. Intente otra vez:\n";
+				cout << "Nuevo total de soldados que disparan: ";
+				cin >> soldadosD;
+			}
+			cout << "Cuantos dias estara la compania en el campo?" << endl;
+			cin >> dias;
+			cout << "Cuantas noches estara la compania en el campo?" <<endl;
+			cin >> noches;
+			int nodsHQ;
+			int nodsFPLT;
+			int nodsSPLT;
+			int nodsTPLT;
+			cout << "Cuantos Night Optic Device System por peloton llevan?"<< endl << "HQ: ";
+			cin >> nodsHQ;
+			cout << "1PLT: ";
+			cin >> nodsFPLT;
+			cout << "2PLT: ";
+			cin >> nodsSPLT;
+			cout << "3PLT: ";
+			cin >> nodsTPLT;
+			int nods = (nodsHQ + nodsFPLT + nodsSPLT + nodsTPLT);
+			int balasPorSoldado = 90; // 3 cargadores
+			int totalBalas = soldadosD * balasPorSoldado;
+			int bateriasPorNod = 2;
+			int totalBaterias = 0;
+			if (noches > 0) {
+				totalBaterias = nods * bateriasPorNod * noches;
+			}
+			cout << "\n===== RESULTADOS FIELD =====\n";
+			cout << rango << " " << apellido_paterno << ", " << nombre
+			     << ", Necesitara un total de: " << totalBalas << " balas\n";
+			cout << "Baterias AA necesarias: " << totalBaterias << endl;
+			cout << "Lleva un total de: " << soldadosP << " soldados" << endl;
+			cout << "============================\n";
+		}
+// ======================= RANGE OPTION =======================
+
+		else if (opcion == 2) {
+			int soldadosHQ;
+			int soldadosFPLT;
+			int soldadosSPLT;
+			int soldadosTPLT;
+			cout << "Cuantos soldados por peloton iran?" << endl << " HQ: ";
+			cin >> soldadosHQ;
+			cout << "1PLT: ";
+			cin >> soldadosFPLT;
+			cout << "2PLT: ";
+			cin >> soldadosSPLT;
+			cout << "3PLT: ";
+			cin >> soldadosTPLT;
+			int soldadosP = (soldadosHQ + soldadosFPLT + soldadosSPLT +
+			                 soldadosTPLT);
+			int tiradores = 0;
+			cout << "Cuantos soldados van a disparar en el range?" << endl;
+			cin >> tiradores;
+			int totalBalas = 0;
+			for (int i = 0; i < tiradores; i++) {
+				totalBalas = totalBalas + 40;   // 40 rounds por soldado
+			}
+			cout << "\n===== RESULTADOS RANGE =====\n";
+			cout << rango << " " << apellido_paterno << ", " << nombre
+			     << ", Necesitara un total de: " << totalBalas << " balas\n";
+			cout << "Lleva un total de: " << soldadosP << " soldados" << endl;
+			cout << "============================\n";
+		}
+		else {
+			cout << "Opcion invalida. Reinicie el programa por favor." << endl;
+		}
+		cout << "\nDesea ejecutar el programa otra vez? (y/n): ";
+		cin >> repetir;
+	}
+	cout << "Programa finalizado.\n";
+	return 0;
+}
